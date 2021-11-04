@@ -13,7 +13,28 @@ import { Component } from "@angular/core";
           name="email"
           required
           pattern=".+@.+"
+          #emailField="ngModel"
         />
+        <p
+          *ngIf="
+            emailField.touched &&
+            emailField.invalid &&
+            emailField.errors.required
+          "
+          class="alert alert-danger"
+        >
+          Wymagany jest adres email.
+        </p>
+        <p
+          *ngIf="
+            emailField.touched &&
+            emailField.invalid &&
+            emailField.errors.pattern
+          "
+          class="alert alert-danger"
+        >
+          Adres email jest nieprawidłowy.
+        </p>
       </div>
       <button class="btn btn-primary" type="submit">Rejestracja</button>
     </form>
@@ -33,6 +54,6 @@ export class SignupFormComponent {
   email: string = "";
 
   onSubmit() {
-    console.log("Test onSubmit", this.email);
+    console.log("Test on submit", this.email);
   }
 }
